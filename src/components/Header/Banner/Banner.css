@@ -1,0 +1,10 @@
+/* this is banner css */
+.banner-section {
+  background-image: url("../../../images/banner/banner-1.jpg");
+  height: 600px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.text {
+  font-size: 4.5rem;
+}

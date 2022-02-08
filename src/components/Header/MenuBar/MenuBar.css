@@ -1,0 +1,24 @@
+/* this is menubar css */
+.a {
+  text-decoration: none;
+  margin-right: 15px;
+  color: #7a7983;
+}
+
+.a:hover {
+  color: orange;
+}
+
+@media only screen and (max-width: 768px) {
+  #basic-navbar a {
+    display: flex;
+    flex-direction: column;
+  }
+  #login-button {
+    display: flex;
+    justify-content: center;
+  }
+  #login-button a {
+    text-decoration: none;
+  }
+}
