@@ -13,7 +13,8 @@ import NotFound from './components/NotFound/NotFound';
 import Login from './components/Authentication/Login/Login';
 import Register from './components/Authentication/Register/Register';
 import AuthProvider from './context/AuthProvider';
-import MenuBar from './components/Header/MenuBar/MenuBar';
+import Dashboard from './components/Dashboard/Dashboard/Dashboard';
+import PrivateRoute from './components/Authentication/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -21,13 +22,12 @@ function App() {
 
       <AuthProvider>
         <Router>
-         <MenuBar></MenuBar>
           <Switch>
             <Route exact path="/">
-              <Home></Home>
+              <Home />
             </Route>
             <Route path="/home">
-              <Home></Home>
+              <Home />
             </Route>
             <Route path="/login">
               <Login />
@@ -35,8 +35,11 @@ function App() {
             <Route path="/register">
               <Register />
             </Route>
+            <PrivateRoute path="/dashboard">
+              <Dashboard />
+            </PrivateRoute>
             <Route path="*">
-              <NotFound></NotFound>
+              <NotFound />
             </Route>
           </Switch>
           <Footer></Footer>

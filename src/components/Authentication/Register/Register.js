@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-// import logo from '../../../images/logo-2.png'
+import logo from '../../../images/logo-2.png'
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
+import { Button } from 'react-bootstrap';
 
 const Register = () => {
     const { registerUser, error } = useAuth();
@@ -26,7 +27,7 @@ const Register = () => {
         <div className="login-form">
             <div className="container py-5">
                 <div className="text-center">
-                    {/* <img src={logo} alt="" className="w-25" /> */}
+                    <img src={logo} alt="" className="w-25" />
                 </div>
                 <div className="container w-100">
                     <div className="form-container mx-auto rounded-3 px-5 py-5">
@@ -41,7 +42,7 @@ const Register = () => {
 
                             <input type="password" className="form-control my-3" {...register("password", { required: true })} placeholder="Enter Your Password" />
 
-                            <button type="submit" className="pink-btn w-100 mb-2">Register</button>
+                            <Button type="submit" variant="info" className="pink-btn w-100 mb-2">Register</Button>
                         </form>
                         <p>Already have an account? <Link to="/login" className="pink-text">Login</Link></p>
                         {errorMsg}

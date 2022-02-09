@@ -29,7 +29,7 @@ const useFirebase = () => {
                 }).then(() => {
                 }).catch((error) => {
                 });
-                history.replace('/');
+                history.replace('/dashboard');
             })
             .catch((error) => {
                 setError(error.message);
@@ -42,7 +42,7 @@ const useFirebase = () => {
         setIsLoading(true);
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                const destination = location?.state?.from || '/';
+                const destination = location?.state?.from || '/dashboard';
                 history.replace(destination);
                 setError('');
             })
@@ -77,7 +77,7 @@ const useFirebase = () => {
 
     const storeUser = (email, displayName) => {
         const user = { email, displayName }
-        fetch('https://lip-care-server.herokuapp.com/user', {
+        fetch('http://localhost:5000/user', {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)
@@ -87,7 +87,7 @@ const useFirebase = () => {
     }
     // check admin
     useEffect(() => {
-        fetch(`https://lip-care-server.herokuapp.com/saveUser/${user?.email}`)
+        fetch(`http://localhost:5000/saveUser/${user?.email}`)
             .then(res => res.json())
             .then(data => setAdmin(data.admin))
     }, [user?.email])
