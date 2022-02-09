@@ -1,24 +1,9 @@
-/* this is menubar css */
-.a {
+.menu a {
   text-decoration: none;
-  margin-right: 15px;
-  color: #7a7983;
+  margin: 0px 20px;
+  color: black;
 }
 
-.a:hover {
-  color: orange;
-}
-
+/* css responsive */
 @media only screen and (max-width: 768px) {
-  #basic-navbar a {
-    display: flex;
-    flex-direction: column;
-  }
-  #login-button {
-    display: flex;
-    justify-content: center;
-  }
-  #login-button a {
-    text-decoration: none;
-  }
 }

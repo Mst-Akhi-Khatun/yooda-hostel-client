@@ -7,12 +7,12 @@ const Footer = () => {
             <div className="row">
                 <div className="col-md-5 text-start ps-5">
                     <h4 className="text-uppercase">
-                        <span className="text-warning">travily</span> tour planner
+                        <span className="text-info">Hostel</span> Yooda
                     </h4>
                     <h3>Subscribe Us Now:</h3>
                     <div class="input-group w-75">
                         <input type="text" className="form-control" placeholder="your email address" />
-                        <button className="btn btn-warning" type="button">Subscribe</button>
+                        <button className="btn btn-info" type="button">Subscribe</button>
                     </div>
                     <p className="mt-3">Thanks for subscribing us.</p>
                     <i className="fab fa-facebook-square fs-2"></i>
@@ -43,7 +43,7 @@ const Footer = () => {
             <footer>
                 <div className="row">
                     <div className="col-md-6">
-                        <p className="text-white text-center">&copy; Travily Tour Planner All Rights Reserved</p>
+                        <p className="text-white text-center">&copy; Yooda hostel All Rights Reserved</p>
                     </div>
                     <div className="col-md-6">
                         <span className="border-end me-2 pe-2">Privacy Policy</span>

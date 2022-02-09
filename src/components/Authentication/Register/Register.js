@@ -1,90 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import { Card, Button } from 'react-bootstrap';
-import { useForm } from "react-hook-form";
-import { useParams } from 'react-router';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+// import logo from '../../../images/logo-2.png'
+import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
 
-// this is register section
 const Register = () => {
-    const { user } = useAuth();
-    const { id } = useParams();
-    const [booking, setBooking] = useState({});
+    const { registerUser, error } = useAuth();
+    const history = useHistory();
+    const [errorMsg, setErrorMsg] = useState('')
 
-    // use effect
-    useEffect(() => {
-        fetch(`https://travily-tour-planner.herokuapp.com/booking/${id}`)
-            .then(res => res.json())
-            .then(data => setBooking(data))
-    }, [])
-
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit } = useForm();
     const onSubmit = data => {
-        data.status = 'pending';
-        data.img = booking.img;
-        fetch('https://travily-tour-planner.herokuapp.com/bookPackage', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    alert('Package successfully booked!');
-                    reset();
-                }
-            })
-
+        registerUser(data?.email, data?.password, data?.username, history);
+        if (data.password.length < 6) {
+            setErrorMsg(<h6 className="text-white pink-bg py-1">Password must be at least 6 characters!</h6>)
+        }
+        else if (error) {
+            setErrorMsg(<h6 className="text-white pink-bg py-1">Email already used</h6>)
+        }
+        else {
+            setErrorMsg('')
+        }
     };
     return (
-        <div className="row g-4">
-            <div className="col-md-12">
-                <div className="row px-4">
-                    <div className="col-md-3"></div>
-                    <div className="mx-auto col-md-6">
-                        <Card className="shadow-lg pt-3">
-                            <Card.Img variant="top" src={booking?.img} className="w-50 mx-auto" height="200px" />
-                            <Card.Body>
-                                <Card.Title><h3>{booking?.name}</h3></Card.Title>
-                                <Card.Text>
-                                    <h4>{booking?.description}</h4>
-                                </Card.Text>
-                                <h3 className="text-primary">${booking?.price}</h3>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                    <div className="col-md-3"></div>
+        <div className="login-form">
+            <div className="container py-5">
+                <div className="text-center">
+                    {/* <img src={logo} alt="" className="w-25" /> */}
                 </div>
-            </div>
-            <div className="col-md-12">
-                <div className="container py-5">
-                    <h1 className="my-3 text-warning text-uppercase">Package Registration Form</h1>
-                    <div className="row">
-                        <div className="col-md-3"></div>
-                        <div className="col-md-6">
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                                {user?.displayName && <input className="form-control" {...register("username", { required: true })} defaultValue={user?.displayName} />}
+                <div className="container w-100">
+                    <div className="form-container mx-auto rounded-3 px-5 py-5">
+                        <h3>Welcome</h3>
+                        <p>Register for an account using your preferred social network authentication</p>
+                        {/* login form */}
 
-                                {user?.email && <input className="form-control my-4" {...register("email", { required: true })} defaultValue={user?.email} />}
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <input type="text" className="form-control" {...register("username", { required: true })} placeholder="Enter Your Name" />
 
-                                <input className="form-control" {...register("address", { required: true })} placeholder="Address" />
-                                {errors.address && <span className="text-danger">This field is required</span>}
+                            <input type="email" className="form-control my-3" {...register("email", { required: true })} placeholder="Enter Your Email" />
 
-                                <input className="form-control mt-4" {...register("date", { required: true })} type="date" />
-                                {errors.date && <span className="text-danger">This field is required</span>}
+                            <input type="password" className="form-control my-3" {...register("password", { required: true })} placeholder="Enter Your Password" />
 
-                                {booking?.name && <input className="form-control mt-4" {...register("package", { required: true })} defaultValue={booking?.name} />}
-
-                                {booking?.price && <input className="form-control mt-4" {...register("price", { required: true })} defaultValue={booking?.price} />}
-
-                                <input className="mt-4 btn-warning form-control" type="submit" value="Registration" />
-                            </form>
-                        </div>
-                        <div className="col-md-3"></div>
+                            <button type="submit" className="pink-btn w-100 mb-2">Register</button>
+                        </form>
+                        <p>Already have an account? <Link to="/login" className="pink-text">Login</Link></p>
+                        {errorMsg}
                     </div>
                 </div>
             </div>
         </div>
-
     );
 };
 

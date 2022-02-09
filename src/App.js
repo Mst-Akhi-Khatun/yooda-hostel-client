@@ -6,12 +6,14 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import MenuBar from './components/Header/MenuBar/MenuBar';
-import AuthProvider from './AuthProvider/AuthProvider';
+
 import Home from './components/Home/Home';
 import Footer from './components/Footer/Footer';
 import NotFound from './components/NotFound/NotFound';
 import Login from './components/Authentication/Login/Login';
+import Register from './components/Authentication/Register/Register';
+import AuthProvider from './context/AuthProvider';
+import MenuBar from './components/Header/MenuBar/MenuBar';
 
 function App() {
   return (
@@ -19,7 +21,7 @@ function App() {
 
       <AuthProvider>
         <Router>
-          <MenuBar></MenuBar>
+         <MenuBar></MenuBar>
           <Switch>
             <Route exact path="/">
               <Home></Home>
@@ -29,6 +31,9 @@ function App() {
             </Route>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
             </Route>
             <Route path="*">
               <NotFound></NotFound>
