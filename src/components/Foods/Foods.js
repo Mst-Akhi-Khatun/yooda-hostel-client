@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
 
 const Foods = () => {
-    const { register, handleSubmit, reset } = useForm();
-    // manage order section
+   
     const [allFoods, setAllFoods] = useState([]);
 
 
@@ -14,9 +12,7 @@ const Foods = () => {
             .then(data => setAllFoods(data))
     }, [])
 
-    const onSubmit = data => {
-
-    };
+  
 
     return (
         <div className="container my-5">

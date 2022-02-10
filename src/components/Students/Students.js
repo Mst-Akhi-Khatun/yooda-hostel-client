@@ -6,17 +6,23 @@ const Students = () => {
     // manage order section
     const [allStudents, setAllStudents] = useState([]);
     const [remove, setRemove] = useState(false);
-    const [booking, setBooking] = useState({})
-    const [updateStatus, setUpdateStatus] = useState(false);
     const [updated, setUpdated] = useState(false);
+    const [pageCount, setPageCount] = useState(0);
+    const [page, setPage] = useState(0);
+    const size = 5;
 
     useEffect(() => {
-        fetch('http://localhost:5000/allStudents')
+        fetch(`http://localhost:5000/allStudent?page=${page}&&size=${size}`)
             .then(res => res.json())
-            .then(data => setAllStudents(data))
-    }, [remove, updated])
+            .then(data => {
+                setAllStudents(data.result);
+                const count = data.count;
+                const pageNumber = Math.ceil(count / 5);
+                setPageCount(pageNumber)
+            })
+    }, [remove, updated, page])
 
-    const handleRemovePackage = id => {
+    const handleRemove = id => {
         const proceed = window.confirm("Sure want to remove?");
         if (proceed) {
             fetch(`http://localhost:5000/removeStudent/${id}`, {
@@ -108,14 +114,22 @@ const Students = () => {
                                 </span>
                             </td>
                             <td>
-                                <button onClick={() => handleRemovePackage(student?._id)} className="btn btn-danger mt-1 me-2">Remove</button>
+                                <button onClick={() => handleRemove(student?._id)} className="btn btn-danger mt-1 me-2">Remove</button>
                                 {/* <button onClick={() => handleStatus(student?._id)} className="btn btn-warning mt-1 me-2">Approve</button> */}
 
                             </td>
                         </tr>)
                     }
                 </tbody>
+
             </Table>
+            <div className="pagination">
+                {
+                    [...Array(pageCount).keys()]
+                        .map(number => <button key={number} onClick={() => setPage(number)} className={page === number ? "selected" : ""}>{number + 1}
+                        </button>)
+                }
+            </div>
         </div>
     );
 };
