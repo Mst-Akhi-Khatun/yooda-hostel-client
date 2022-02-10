@@ -2,7 +2,7 @@
 
 ## Admin Email: admin@admin.com
 
-## Adminass: abc123
+## Admin Pass: abc123
 
 To visit the client side: [Click here](https://yooda-hostel-3097c.web.app/).
 
