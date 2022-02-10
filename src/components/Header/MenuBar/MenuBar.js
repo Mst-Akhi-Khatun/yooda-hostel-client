@@ -29,7 +29,7 @@ const MenuBar = () => {
                         <Nav className="ms-auto menu d-flex align-items-center">
                             <Nav.Item>
                                 <Link to="/home">Home</Link>
-                                <Link to="/home">Rooms</Link>
+                                <Link to="/room">Rooms</Link>
                                 <Link to="/dashboard">Admin Panel</Link>
                             </Nav.Item>
 
