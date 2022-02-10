@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import './MenuBar.css';
-import image from '../../../images/logo-1.png';
 
 const MenuBar = () => {
     // menubar section
@@ -23,13 +22,6 @@ const MenuBar = () => {
             <Navbar collapseOnSelect expand="lg">
                 <Container>
                     <Navbar.Brand href="#home">
-                        <img
-                            src={image}
-                            width="60"
-                            height="60"
-                            className="d-inline-block align-top"
-                            alt="React Bootstrap logo"
-                        />
                         Yooda Hostel
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -37,13 +29,12 @@ const MenuBar = () => {
                         <Nav className="ms-auto menu d-flex align-items-center">
                             <Nav.Item>
                                 <Link to="/home">Home</Link>
-                                <Link to="/dashboard">Dashboard</Link>
-                                <Link to="/contact">Rooms</Link>
+                                <Link to="/dashboard">Admin Panel</Link>
                             </Nav.Item>
 
                             {user?.email ? <Nav.Item className="mt-1 text-center">
 
-                                <span className="text-center">Signed in as:<a href="#login">{user?.displayName}</a></span>
+                                <span className="text-center"><a href="#login">{user?.displayName}</a></span>
 
                                 <Button onClick={logout} variant="info" className="mx-3 mt-1 rounded-pill px-4">Log Out</Button>
 

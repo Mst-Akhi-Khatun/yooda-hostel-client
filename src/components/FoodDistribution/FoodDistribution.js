@@ -12,6 +12,7 @@ const FoodDistribution = () => {
     const [pageCount, setPageCount] = useState(0);
     const [page, setPage] = useState(0);
     const size = 5;
+    const [displayUsers, setDisplayUser] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:5000/allFoods')
@@ -25,6 +26,7 @@ const FoodDistribution = () => {
             .then(res => res.json())
             .then(data => {
                 setAllStudents(data.result);
+                setDisplayUser(data.result)
                 const count = data.count;
                 const pageNumber = Math.ceil(count / 5);
                 setPageCount(pageNumber)
@@ -59,6 +61,14 @@ const FoodDistribution = () => {
 
     }
 
+    const handleSearch = (event) => {
+        const searchText = event.target.value;
+
+        const matchedStudent = allStudents.filter(person => (person.roll === searchText) || (person.fullName.toLowerCase().includes(searchText.toLowerCase()))
+
+        );
+        setDisplayUser(matchedStudent);
+    }
 
     return (
         <div className="container my-5">
@@ -131,6 +141,11 @@ const FoodDistribution = () => {
                 </div>}
 
             <h1 className="my-5">Food Distribution List</h1>
+            <input type="text"
+                className="form-control w-50 mx-auto my-5"
+                onChange={handleSearch}
+                placeholder="Search by Name or Roll" />
+
             <Table responsive="sm" striped bordered hover>
                 <thead>
                     <tr>
@@ -143,7 +158,7 @@ const FoodDistribution = () => {
                 </thead>
                 <tbody>
                     {
-                        allStudents.map((student, index) => <tr key={student?._id}>
+                        displayUsers.map((student, index) => <tr key={student?._id}>
                             <td>{index + 1}</td>
                             <td>{student?.fullName} ({student?.status})</td>
                             <td>{student?.roll}</td>

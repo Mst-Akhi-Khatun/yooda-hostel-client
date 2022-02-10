@@ -29,20 +29,18 @@ const Dashboard = () => {
                         <Offcanvas.Header closeButton className="pink-bg">
                             <Offcanvas.Title id="offcanvasNavbarLabel" className="text-white">Dashboard</Offcanvas.Title>
                         </Offcanvas.Header>
-                        <Offcanvas.Body className="light-pink-bg text-center menu-item">
-                            <Nav className="justify-content-end flex-grow-1 pe-3 fs-5">
+                        <Offcanvas.Body className="light-pink-bg text-start menu-item">
+                            <Nav className="justify-content-end flex-grow-1 ps-5 fs-5">
                                 <Link to="/home" className="nav-item">Home</Link>
-                                {!admin ? <Nav>
+                                {admin && <Nav>
                                     <Link to={`${url}/foods`} className="nav-item">Foods</Link>
                                     <Link to={`${url}/students`} className="nav-item">Students</Link>
-                                </Nav>
-                                    :
-                                    <Nav>
-                                        <Link to={`${url}/addFood`} className="nav-item">Add Food</Link>
-                                        <Link to={`${url}/addStudent`} className="nav-item">Add Student</Link>
-                                        <Link to={`${url}/foodDistribution`} className="nav-item">Food Distribution</Link>
-                                    </Nav>}
-                                <button onClick={logout} className="pink-btn mt-3 w-50 mx-auto">Log out</button>
+
+                                    <Link to={`${url}/addFood`} className="nav-item">Add Food</Link>
+                                    <Link to={`${url}/addStudent`} className="nav-item">Add Student</Link>
+                                    <Link to={`${url}/foodDistribution`} className="nav-item">Food Distribution</Link>
+                                </Nav>}
+                                <button onClick={logout} className="pink-btn mt-3 w-50">Log out</button>
                             </Nav>
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
