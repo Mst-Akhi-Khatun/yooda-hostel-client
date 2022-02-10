@@ -16,22 +16,22 @@ const Students = () => {
             .then(data => setAllStudents(data))
     }, [remove, updated])
 
-    /* const handleRemovePackage = id => {
+    const handleRemovePackage = id => {
         const proceed = window.confirm("Sure want to remove?");
         if (proceed) {
-            fetch(`https://travily-tour-planner.herokuapp.com/myPackages/${id}`, {
+            fetch(`http://localhost:5000/removeStudent/${id}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' }
             })
                 .then(res => res.json())
                 .then(data => {
                     if (data.deletedCount > 0) {
-                        alert("Package successfully removed!")
+                        alert("Student successfully removed!")
                         setRemove(!remove)
                     };
                 })
         }
-    } */
+    }
 
     /* const handleStatus = id => {
         fetch(`https://travily-tour-planner.herokuapp.com/allBookings/${id}`)
@@ -108,8 +108,8 @@ const Students = () => {
                                 </span>
                             </td>
                             <td>
-                                {/* <button onClick={() => handleRemovePackage(student?._id)} className="btn btn-danger mt-1 me-2">Remove</button>
-                                <button onClick={() => handleStatus(student?._id)} className="btn btn-warning mt-1 me-2">Approve</button> */}
+                                <button onClick={() => handleRemovePackage(student?._id)} className="btn btn-danger mt-1 me-2">Remove</button>
+                                {/* <button onClick={() => handleStatus(student?._id)} className="btn btn-warning mt-1 me-2">Approve</button> */}
 
                             </td>
                         </tr>)
