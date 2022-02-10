@@ -15,14 +15,14 @@ const FoodDistribution = () => {
     const [displayUsers, setDisplayUser] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/allFoods')
+        fetch('https://mighty-everglades-68813.herokuapp.com/allFoods')
             .then(res => res.json())
             .then(data => setAllFoods(data))
     }, [])
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/allStudent?page=${page}&&size=${size}`)
+        fetch(`https://mighty-everglades-68813.herokuapp.com/allStudent?page=${page}&&size=${size}`)
             .then(res => res.json())
             .then(data => {
                 setAllStudents(data.result);
@@ -39,7 +39,7 @@ const FoodDistribution = () => {
     const onSubmit = data => {
         data.foodStatus = "served"
         const id = studentInfo?._id
-        fetch(`http://localhost:5000/student/${id}`, {
+        fetch(`https://mighty-everglades-68813.herokuapp.com/student/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
@@ -55,7 +55,7 @@ const FoodDistribution = () => {
     };
 
     const handleStudentInfo = id => {
-        fetch(`http://localhost:5000/studentInfo/${id}`)
+        fetch(`https://mighty-everglades-68813.herokuapp.com/studentInfo/${id}`)
             .then(res => res.json())
             .then(data => setStudentInfo(data))
 

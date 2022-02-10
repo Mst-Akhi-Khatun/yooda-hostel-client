@@ -11,7 +11,7 @@ const Foods = () => {
     const size = 5;
 
     useEffect(() => {
-        fetch(`http://localhost:5000/allFoods?page=${page}&&size=${size}`)
+        fetch(`https://mighty-everglades-68813.herokuapp.com/allFoods?page=${page}&&size=${size}`)
             .then(res => res.json())
             .then(data => {
                 setAllFoods(data.result);
@@ -20,6 +20,23 @@ const Foods = () => {
                 setPageCount(pageNumber)
             })
     }, [remove, updated, page])
+
+    const handleRemove = id => {
+        const proceed = window.confirm("Sure want to remove?");
+        if (proceed) {
+            fetch(`https://mighty-everglades-68813.herokuapp.com/removeFood/${id}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        alert("Food successfully removed!")
+                        setRemove(!remove)
+                    };
+                })
+        }
+    }
 
     return (
         <div className="container my-5">
@@ -31,6 +48,7 @@ const Foods = () => {
                         <th>#</th>
                         <th>Food Name</th>
                         <th>Price</th>
+                        <th>Manage</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,6 +57,7 @@ const Foods = () => {
                             <td>{index + 1}</td>
                             <td>{food?.name}</td>
                             <td>$ {food?.price}</td>
+                            <td><button onClick={() => handleRemove(food?._id)} className="btn btn-danger mt-1 me-2">Remove</button></td>
                         </tr>)
                     }
                 </tbody>

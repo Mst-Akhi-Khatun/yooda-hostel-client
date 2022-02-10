@@ -5,7 +5,7 @@ const AddStudents = () => {
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
         data.status = 'active';
-        fetch("http://localhost:5000/addStudent", {
+        fetch("https://mighty-everglades-68813.herokuapp.com/addStudent", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
